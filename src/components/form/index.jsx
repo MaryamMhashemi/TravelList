@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function Form() {
+  //useState foor
   const [description, setDescription] = useState("");
   return (
     <form className="bg-[#e5771f] flex justify-center items-center gap-2">
