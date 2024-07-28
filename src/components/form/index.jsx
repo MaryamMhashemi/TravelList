@@ -3,13 +3,28 @@ import React, { useState } from "react";
 export default function Form() {
   //useState foor
   const [description, setDescription] = useState("");
+  const [choose, setChoose] = useState(1);
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!description) return;
+    const newItem = { description, choose, packed: false, id: Date.now() };
+    setChoose(1);
+    setDescription("");
+  }
   return (
-    <form className="bg-[#e5771f] flex justify-center items-center gap-2">
+    <form
+      className="bg-[#e5771f] flex justify-center items-center gap-2"
+      onSubmit={handleSubmit}
+    >
       <h3 className="mr-[1.6rem] text-[2.4rem]">
         What do you need for your 😍 trip ?
       </h3>
       <div className="text-[#5a3e2b] gap-1 flex flex-row text-inherit border-none  cursor-pointer py-[1.2rem] px-[3.2rem] font-bold text-[1rem]">
-        <select className="bg-[#ffebb3] rounded-[10rem] py-2 px-3">
+        <select
+          className="bg-[#ffebb3] rounded-[10rem] py-2 px-3"
+          value={choose}
+          onChange={(e) => setChoose(Number(e.target.value))}
+        >
           {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
             <option value={num} key={num}>
               {num}
@@ -20,6 +35,8 @@ export default function Form() {
           type="text"
           placeholder="Item..."
           className="bg-[#ffebb3] rounded-[10rem] py-2 px-1"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <button
           className="uppercase bg-[#76c7ad] rounded-[10rem]   py-2 px-3"
